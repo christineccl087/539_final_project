@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Stories | A Visual Portfolio</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo" aria-label="CC's Travel Stories Home">
+        <span class="logo-text">CC's Travel Stories</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <nav id="nav-menu" aria-label="Main navigation">
+        <ul class="nav-list" role="list">
+          <li><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+          <li class="dropdown">
+            <a href="#trips" class="nav-link">Trips</a>
+            <ul class="dropdown-menu" role="list">
+              <li><a href="trips/fukuoka.html" class="dropdown-link">Fukuoka</a></li>
+              <li><a href="trips/vegas.html" class="dropdown-link">Las Vegas</a></li>
+              <li><span class="dropdown-link dropdown-soon">Tokyo <span class="soon-label">Coming soon</span></span></li>
+              <li><span class="dropdown-link dropdown-soon">Barcelona <span class="soon-label">Coming soon</span></span></li>
+              <li><span class="dropdown-link dropdown-soon">Seattle <span class="soon-label">Coming soon</span></span></li>
+            </ul>
+          </li>
+          <li><span class="nav-link nav-link-disabled" aria-disabled="true">Contact</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-content">
+        <p class="hero-eyebrow">A visual portfolio</p>
+        <h1 class="hero-title">Every trip<br /><em>tells a story.</em></h1>
+        <p class="hero-subtitle">Curated itineraries, photography, and memories from around the world.</p>
+        <a href="#trips" class="btn btn-primary">Explore Trips</a>
+      </div>
+      <div class="hero-image-grid" aria-hidden="true">
+        <div class="hero-img hero-img--1">
+          <img src="images/fukuoka/road_to_dazaifu_shrine.jpeg" alt="" role="presentation" />
+        </div>
+        <div class="hero-img hero-img--2">
+          <img src="images/fukuoka/kushida-jinja-2.jpeg" alt="" role="presentation" />
+        </div>
+        <div class="hero-img hero-img--3">
+          <img src="images/vegas/day3-bellagio-lake-and-paris.jpeg" alt="" role="presentation" />
+        </div>
+      </div>
+    </section>
+
+    <section class="about-strip" aria-label="About this portfolio">
+      <div class="container">
+        <p class="about-text">
+          Hi, I'm a traveler, photographer, and storyteller. This site is my personal archive —
+          a place where I document not just where I've been, but <em>how it felt to be there.</em>
+        </p>
+      </div>
+    </section>
+
+    <section class="trips-section" id="trips" aria-labelledby="trips-heading">
+      <div class="container">
+        <h2 class="section-title" id="trips-heading">Recent Trips</h2>
+        <p class="section-subtitle">Click any destination to explore itineraries, photos, and highlights.</p>
+
+        <div class="trips-grid">
+
+          <article class="trip-card" aria-label="Fukuoka trip">
+            <a href="trips/fukuoka.html" class="trip-card_link" tabindex="0">
+              <div class="trip-card_image-wrap">
+                <img
+                  src="images/fukuoka/dazaifu_shrine.jpeg"
+                  alt="Dazaifu Tenmangu Shrine surrounded by greenery in Fukuoka"
+                  class="trip-card_image"
+                  loading="lazy"
+                />
+                <span class="trip-card_tag">Kyushu</span>
+              </div>
+              <div class="trip-card_body">
+                <p class="trip-card_date">August 2025 · 4 days</p>
+                <h3 class="trip-card_title">Fukuoka</h3>
+                <p class="trip-card_excerpt">A short Kyushu trip with Dazaifu, Hakata food stops, Sushi Shiro omakase, and a Yufuin no Mori day trip.</p>
+                <span class="trip-card_cta" aria-hidden="true">View Trip →</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="trip-card" aria-label="Vegas trip">
+            <a href="trips/vegas.html" class="trip-card_link" tabindex="0">
+              <div class="trip-card_image-wrap">
+                <img
+                  src="images/vegas/day3-bellagio-lake-and-paris.jpeg"
+                  alt="Bellagio lake with the Paris Las Vegas Eiffel Tower in the background"
+                  class="trip-card_image"
+                  loading="lazy"
+                />
+                <span class="trip-card_tag">Nevada</span>
+              </div>
+              <div class="trip-card_body">
+                <p class="trip-card_date">February 2026 · 6 days</p>
+                <h3 class="trip-card_title">Las Vegas</h3>
+                <p class="trip-card_excerpt">The bright lights and endless entertainment of Las Vegas — a city that never sleeps.</p>
+                <span class="trip-card_cta" aria-hidden="true">View Trip →</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="trip-card trip-card--coming-soon" aria-label="More trips coming soon">
+            <div class="trip-card_coming-soon-body">
+              <p class="coming-soon-icon" aria-hidden="true">✈</p>
+              <h3 class="trip-card_title">More Coming Soon</h3>
+              <p class="trip-card_excerpt">New adventures are always on the horizon. Check back for updates.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+    <section class="stats-section" aria-label="Travel statistics">
+      <div class="container stats-grid">
+        <div class="stat">
+          <span class="stat-number" aria-label="11 countries visited">11</span>
+          <span class="stat-label">Countries</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" aria-label="50 cities & regions traveled">50</span>
+          <span class="stat-label">Cities & Regions Traveled</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" aria-label="hundreds of photos taken">10,000+</span>
+          <span class="stat-label">Photos Taken</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" aria-label="countless memories">∞</span>
+          <span class="stat-label">Memories</span>
+        </div>
+      </div>
+    </section>
+    <section class="cta-section" aria-label="Contact call to action">
+      <div class="container cta-inner">
+        <h2 class="cta-title">Want to know more about a trip?</h2>
+        <p class="cta-text">I'd love to share recommendations, itinerary details, or photography tips.</p>
+        <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-logo">CC's Travel Stories</p>
+      <nav aria-label="Footer navigation">
+        <ul class="footer-nav" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copy">&copy; 2026 CC's Travel Stories. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

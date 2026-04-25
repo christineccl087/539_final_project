@@ -1,0 +1,1713 @@
+/* ============================================================
+   Travel Stories — styles.css
+   ============================================================
+   Table of Contents:
+   1. CSS Variables & Reset
+   2. Base Typography
+   3. Layout Utilities
+   4. Skip Link (Accessibility)
+   5. Header & Navigation
+   6. Hamburger Menu
+   7. Hero Sections
+   8. About Strip
+   9. Trips Grid & Cards
+   10. Stats Section
+   11. CTA Section
+   12. Trip Hero
+   13. Breadcrumb
+   14. Trip Meta Bar
+   15. Itinerary
+   16. Photo Gallery
+   17. Highlights
+   18. Trip Navigation
+   19. Contact Page
+   20. Contact Form
+   21. Footer
+   22. Responsive (Mobile-first breakpoints)
+   ============================================================ */
+
+
+/* ============================================================
+   1. CSS Variables & Reset
+   ============================================================ */
+:root {
+  /* Colors */
+  --color-bg:         #faf8f4;
+  --color-surface:    #ffffff;
+  --color-text:       #1c1a17;
+  --color-text-muted: #59524d;
+  --color-accent:     #9a4c22;
+  --color-accent-light: #e8c4a8;
+  --color-border:     #e2ddd6;
+  --color-dark:       #1c1a17;
+  --color-dark-surface: #2a2521;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6rem;
+
+  /* Max widths */
+  --max-width: 1200px;
+  --max-width-narrow: 760px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* Transitions */
+  --transition: 0.2s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+
+/* ============================================================
+   2. Base Typography
+   ============================================================ */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+h1 { font-size: clamp(2.2rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+h3 { font-size: 1.25rem; }
+
+p {
+  color: var(--color-text-muted);
+  max-width: 65ch;
+}
+
+em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   3. Layout Utilities
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin-bottom: var(--space-xs);
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: #7f3a16;
+  border-color: #7f3a16;
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   4. Skip Link (Accessibility)
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-sm);
+  background: var(--color-accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}
+
+
+/* ============================================================
+   5. Header & Navigation
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.nav-list {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--color-text);
+  border-bottom-color: var(--color-accent);
+}
+
+/* Dropdown menu for Trips */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 170px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px #0000001f;
+  padding: 0.5rem 0;
+  z-index: 200;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  display: block;
+}
+
+.dropdown-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dropdown-link:hover,
+.dropdown-link:focus-visible {
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
+
+.dropdown-soon {
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
+.dropdown-soon:hover,
+.dropdown-soon:focus-visible {
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+.soon-label {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+
+
+.nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+
+/* ============================================================
+   6. Hamburger Menu
+   ============================================================ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animated X state */
+.hamburger[aria-expanded="true"] .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger[aria-expanded="true"] .bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger[aria-expanded="true"] .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* ============================================================
+   7. Hero Section (Homepage)
+   ============================================================ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-xl);
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--space-xl) var(--space-md);
+  min-height: 85vh;
+}
+
+.hero-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+  max-width: none;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+  max-width: 45ch;
+}
+
+.hero-image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 12px;
+  height: 520px;
+}
+
+.hero-img {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-img--1 {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.hero-img--2 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.hero-img--3 {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+
+/* ============================================================
+   8. About Strip
+   ============================================================ */
+.about-strip {
+  background: var(--color-dark);
+  color: #fff;
+  padding: var(--space-xl) var(--space-md);
+}
+
+
+.about-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  font-style: italic;
+  color: #e8e0d6;
+  max-width: 70ch;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.about-text em {
+  color: var(--color-accent-light);
+}
+
+
+/* ============================================================
+   9. Trips Grid & Cards
+   ============================================================ */
+.trips-section {
+  padding: var(--space-2xl) 0;
+}
+
+.trips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+}
+
+.trip-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.trip-card:hover {
+  box-shadow: 0 8px 32px #0000001a;
+  transform: translateY(-4px);
+}
+
+.trip-card_link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.trip-card_link:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: -3px;
+  border-radius: var(--radius-lg);
+}
+
+.trip-card_image-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.trip-card_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.trip-card:hover .trip-card_image {
+  transform: scale(1.04);
+}
+
+.trip-card_tag {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+.trip-card_body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: var(--space-md);
+}
+
+.trip-card_date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.4rem;
+  max-width: none;
+}
+
+.trip-card_title {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.trip-card_excerpt {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.trip-card_cta {
+  margin-top: auto;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+/* Coming soon card */
+.trip-card--coming-soon {
+  background: var(--color-bg);
+  border: 2px dashed var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trip-card_coming-soon-body {
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+}
+
+.coming-soon-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+  max-width: none;
+}
+
+
+/* ============================================================
+   10. Stats Section
+   ============================================================ */
+.stats-section {
+  background: var(--color-accent);
+  padding: var(--space-xl) var(--space-md);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: #fff;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d7d0c8;
+  margin-top: 0.25rem;
+}
+
+
+/* ============================================================
+   11. CTA Section
+   ============================================================ */
+.cta-section {
+  padding: var(--space-2xl) var(--space-md);
+}
+
+.cta-inner {
+  text-align: center;
+  max-width: var(--max-width-narrow);
+  margin: 0 auto;
+}
+
+.cta-title {
+  margin-bottom: var(--space-sm);
+}
+
+.cta-text {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-lg);
+  max-width: none;
+}
+
+
+/* ============================================================
+   12. Trip Hero
+   ============================================================ */
+.trip-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.trip-hero_image-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.trip-hero_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trip-hero_overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to top, #000000d1 10%, #0000007a 70%, #0000002e 100%);
+}
+
+.trip-hero_content {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 0;
+  right: 0;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 2px 8px #000000e6;
+}
+
+
+.trip-hero .hero-eyebrow {
+  color: #ffffff;
+}
+
+.trip-hero_title {
+  font-size: clamp(3rem, 7vw, 6rem);
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.trip-hero_subtitle {
+  font-size: 1.15rem;
+  color: #ffffff;
+  max-width: 55ch;
+}
+
+
+/* ============================================================
+   13. Breadcrumb
+   ============================================================ */
+.breadcrumb {
+  padding-top: var(--space-md);
+  padding-bottom: 0;
+}
+
+.breadcrumb ol {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.breadcrumb li {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.breadcrumb a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.breadcrumb a:hover {
+  color: #9a4c22;
+}
+
+
+/* ============================================================
+   14. Trip Meta Bar
+   ============================================================ */
+.trip-intro {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+
+.trip-meta-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.trip-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.meta-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.meta-value {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.trip-intro__text p,
+.trip-intro_text p {
+  max-width: none;
+  width: 100%;
+  margin-bottom: var(--space-sm);
+}
+
+
+/* ============================================================
+   15. Itinerary
+   ============================================================ */
+.itinerary-section {
+  padding-bottom: var(--space-2xl);
+}
+
+.itinerary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 2px solid var(--color-border);
+  margin-left: 2.5rem;
+}
+
+.itinerary-day {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-md);
+  padding: var(--space-md) 0 var(--space-md) var(--space-lg);
+  position: relative;
+}
+
+.itinerary-day::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: calc(var(--space-md) + 0.5rem);
+  width: 12px;
+  height: 12px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  border: 2px solid var(--color-bg);
+}
+
+.day-marker {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+  min-width: 3.5rem;
+  padding-top: 0.1rem;
+}
+
+.day-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.day-location {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+  max-width: none;
+}
+
+.day-content p {
+  max-width: none;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+
+/* ============================================================
+   16. Photo Gallery
+   ============================================================ */
+.gallery-section {
+  padding: var(--space-xl) 0 var(--space-2xl);
+  background: var(--color-dark);
+}
+
+.gallery-section .section-title {
+  color: #fff;
+  margin-bottom: var(--space-lg);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 280px;
+  gap: 6px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  position: relative;
+  cursor: pointer;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.05);
+}
+
+.gallery-item figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, #000000b3, transparent);
+  color: #fff;
+  font-size: 0.8rem;
+  padding: var(--space-sm);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover figcaption,
+.gallery-item:focus-within figcaption {
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   17. Highlights
+   ============================================================ */
+.highlights-section {
+  padding: var(--space-2xl) var(--space-md);
+}
+
+.highlights-section .section-title {
+  margin-bottom: var(--space-lg);
+}
+
+.highlights-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: none;
+}
+
+.highlight-item {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: var(--space-md);
+  align-items: start;
+}
+
+.highlight-item p {
+  max-width: none;
+  width: 100%;
+}
+
+.highlight-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.highlight-item h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+
+/* ============================================================
+   18. Trip Navigation
+   ============================================================ */
+.trip-nav {
+  padding: var(--space-xl) var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border);
+}
+
+.trip-nav_link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.trip-nav_link:hover {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+}
+
+
+.trip-nav_link:hover .trip-nav_label,
+.trip-nav_link:hover .trip-nav_title {
+  color: var(--color-text);
+}
+
+.trip-nav_link:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.trip-nav_link--prev {
+  margin-right: auto;
+}
+
+.trip-nav_label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.trip-nav_title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+
+
+/* ============================================================
+   19. Contact Page
+   ============================================================ */
+.page-hero--short {
+  padding: var(--space-xl) var(--space-md) var(--space-lg);
+  background: var(--color-dark);
+}
+
+.page-hero--short .hero-eyebrow {
+  color: var(--color-accent-light);
+}
+
+.page-hero_title {
+  color: #fff;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: var(--space-sm);
+}
+
+.page-hero_subtitle {
+  color: #d7d0c8;
+  max-width: none;
+  width: 100%;
+  font-size: 1.05rem;
+}
+
+.contact-section {
+  padding: var(--space-xl) var(--space-md);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.contact-info_title {
+  font-size: 1.3rem;
+  margin-bottom: var(--space-md);
+}
+
+.contact-info_list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-info_list li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: var(--space-sm);
+  align-items: start;
+}
+
+.contact-info_list li span {
+  font-size: 1.4rem;
+}
+
+.contact-info_list strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.contact-info_list p {
+  font-size: 0.9rem;
+}
+
+
+/* ============================================================
+   20. Contact Form
+   ============================================================ */
+.contact-form-wrap {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.4rem;
+}
+
+.required {
+  color: var(--color-accent);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.65rem 0.875rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px #b85c2a26;
+}
+
+.form-input.invalid {
+  border-color: #c0392b;
+  box-shadow: 0 0 0 3px #c0392b26;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.875rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-error {
+  display: block;
+  font-size: 0.82rem;
+  color: #c0392b;
+  margin-top: 0.3rem;
+  min-height: 1.2em;
+}
+
+.form-hint {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-top: 0.3rem;
+}
+
+.btn-submit {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.875rem;
+}
+
+
+
+
+/* ============================================================
+   21. Footer
+   ============================================================ */
+.site-footer {
+  background: var(--color-dark);
+  color: #ffffff;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.site-footer p {
+  color: #ffffff;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  max-width: none;
+}
+
+.footer-nav {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-nav a {
+  font-size: 0.85rem;
+  color: #ffffff;
+  transition: color var(--transition);
+}
+
+.footer-nav a:hover {
+  color: #fff;
+}
+
+.footer-nav a:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.footer-copy {
+  color: #ffffff;
+  font-size: 0.8rem;
+  max-width: none;
+}
+
+
+/* ============================================================
+   22. Responsive (Mobile-first breakpoints)
+   ============================================================ */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+
+  /* Nav — show hamburger, hide nav list by default */
+  .hamburger {
+    display: flex;
+  }
+
+  #nav-menu {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-md);
+    display: none; /* toggled via JS */
+  }
+
+  #nav-menu.is-open {
+    display: block;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .nav-link {
+    font-size: 1.05rem;
+    padding: 0.4rem 0;
+  }
+
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    display: block;
+    position: static;
+    min-width: 0;
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.25rem 0 0.25rem var(--space-sm);
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .dropdown-link {
+    padding: 0.35rem 0;
+  }
+
+  /* Hero */
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: unset;
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-lg);
+  }
+
+  .hero-image-grid {
+    height: 320px;
+  }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Gallery */
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 200px;
+  }
+
+  /* Contact layout */
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  /* Trip nav */
+  .trip-nav {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .trip-nav_link--prev {
+    margin-right: 0;
+  }
+
+  .trip-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-pin {
+    font-size: 0.9rem;
+  }
+
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .hero-image-grid {
+    display: none; /* hide decorative grid on very small screens */
+  }
+
+  .itinerary-list {
+    margin-left: 1rem;
+  }
+
+  .day-marker {
+    font-size: 1.8rem;
+    min-width: 2.5rem;
+  }
+
+  .day-photo-grid {
+    margin-left: calc(-2.5rem - var(--space-md));
+    width: calc(100% + 2.5rem + var(--space-md));
+  }
+
+}
+
+/* Extra sections for individual trip pages */
+.info-section {
+  padding-bottom: var(--space-2xl);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.info-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.info-card h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.info-card p {
+  font-size: 0.95rem;
+}
+
+.resources-section {
+  padding-bottom: var(--space-2xl);
+}
+
+.resource-list {
+  list-style: disc;
+  padding-left: var(--space-md);
+}
+
+.resource-list li {
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.resource-list a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+
+
+/* Interactive Fukuoka stop list */
+.map-section {
+  padding-bottom: var(--space-2xl);
+}
+
+.map-section .section-title {
+  margin-bottom: var(--space-lg);
+}
+
+.trip-map-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+
+.place-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.map-pin {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: var(--space-sm);
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+  text-align: left;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.map-pin:hover,
+.map-pin:focus-visible,
+.map-pin.is-active {
+  background: #ffffff;
+  border-color: var(--color-accent);
+}
+
+.map-pin:hover,
+.map-pin:focus-visible {
+  transform: translateY(-1px);
+}
+
+.map-pin:focus-visible {
+  outline: 3px solid var(--color-accent-light);
+  outline-offset: 2px;
+}
+
+.place-list_number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.map-pin.is-active .place-list_number {
+  background: var(--color-dark);
+}
+
+.place-list_name,
+.place-list_area {
+  display: block;
+}
+
+.place-list_name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.place-list_area {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.map-info {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.map-info_eyebrow {
+  max-width: none;
+  margin-bottom: 0.25rem;
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.map-info h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.map-info p {
+  max-width: none;
+}
+
+.map-info_photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.map-info_photos img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.map-info_photos img:hover,
+.map-info_photos img:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Itinerary photos with simple hover interaction */
+.day-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  margin-left: calc(-3.5rem - var(--space-md));
+  width: calc(100% + 3.5rem + var(--space-md));
+}
+
+.day-photo-grid--single {
+  max-width: 360px;
+}
+
+.day-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  min-height: 180px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-dark);
+  cursor: pointer;
+}
+
+.day-photo:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.day-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.day-photo figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem;
+  background: #000000b8;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transform: translateY(100%);
+  transition: transform 0.25s ease;
+}
+
+.day-photo:hover img,
+.day-photo:focus img {
+  transform: scale(1.07);
+  opacity: 0.78;
+}
+
+.day-photo:hover figcaption,
+.day-photo:focus figcaption {
+  transform: translateY(0);
+}
+
+
+/* Expanded image pop-up */
+.image-lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: #000000d9;
+}
+
+.image-lightbox.is-open {
+  display: flex;
+}
+
+.image-lightbox_content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+.image-lightbox_image {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  background: var(--color-dark);
+}
+
+.image-lightbox_caption {
+  max-width: none;
+  margin-top: var(--space-xs);
+  color: #ffffff;
+}
+
+.image-lightbox_close {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.75rem;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--color-text);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.image-lightbox_close:hover,
+.image-lightbox_close:focus {
+  background: var(--color-accent);
+  color: #ffffff;
+}
